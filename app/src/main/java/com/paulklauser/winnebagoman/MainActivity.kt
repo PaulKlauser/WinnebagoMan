@@ -7,10 +7,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,13 +23,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+import com.google.accompanist.insets.ui.TopAppBar
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.paulklauser.winnebagoman.ui.theme.ToolbarGray
 import com.paulklauser.winnebagoman.ui.theme.WinnebagoManTheme
@@ -33,13 +38,14 @@ import com.paulklauser.winnebagoman.ui.theme.WinnebagoManTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             // Remember a SystemUiController
             val systemUiController = rememberSystemUiController()
 
             DisposableEffect(systemUiController) {
                 systemUiController.setSystemBarsColor(
-                    color = ToolbarGray,
+                    color = Color.Transparent,
                     darkIcons = false
                 )
 
@@ -62,6 +68,7 @@ fun MainScreen(playAsset: (Int) -> Unit) {
         Scaffold(topBar = {
             TopAppBar(
                 title = { Text(text = "Winnebago Man!!", color = Color.White) },
+                contentPadding = WindowInsets.statusBars.asPaddingValues(),
                 backgroundColor = ToolbarGray
             )
         }) {
@@ -295,6 +302,7 @@ fun MainScreen(playAsset: (Int) -> Unit) {
                         Spacer(modifier = Modifier.width(8.dp))
                     }
                     Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.padding(WindowInsets.navigationBars.asPaddingValues()))
                 }
             }
         }
