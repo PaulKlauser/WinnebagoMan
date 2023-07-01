@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Winnebago Man</string>
+    <string name="acutrama">Acutrama</string>
+    <string name="bathroom">Bathroom</string>
+    <string name="kindness">Kindness</string>
+    <string name="clue_here_now">Clue Here Now</string>
+    <string name="dont_slam">Don\'t Slam</string>
+    <string name="fall_off">Fall Off</string>
+    <string name="fly_headlight">Fly Headlight</string>
+    <string name="do_it_again">Do It Again</string>
+    <string name="you_believe">You Believe That?</string>
+    <string name="pth">:P</string>
+    <string name="the_word_rear">The Word Rear</string>
+    <string name="hehehe">Hehehe</string>
+    <string name="make_any_difference">Make Any Difference</string>
+    <string name="dumbass">Dumbass</string>
+    <string name="kick">Kick</string>
+    <string name="my_mind">My Mind</string>
+    <string name="no_more">No More</string>
+    <string name="say_it_right">Say It Right</string>
+    <string name="shun_of_a">Shun Of A…</string>
+    <string name="slate_this">Slate This</string>
+    <string name="what_did_i_say">What Did I Say?</string>
+    <string name="say_tony">Say Tony?</string>
+    <string name="flies">Flies</string>
+    <string name="i_dont_give_a">I Don\'t Give A…</string>
+    <string name="windshield">Windshield</string>
+    <string name="god_dang_son_of_a">God Dang Son Of A…</string>
 </resources>
