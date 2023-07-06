@@ -31,7 +31,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -54,16 +54,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            // Remember a SystemUiController
             val systemUiController = rememberSystemUiController()
-
-            DisposableEffect(systemUiController) {
+            LaunchedEffect(Unit) {
                 systemUiController.setSystemBarsColor(
                     color = Color.Transparent,
                     darkIcons = false
                 )
-
-                onDispose {}
             }
             val backingItems = remember {
                 mutableStateListOf(
