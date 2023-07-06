@@ -164,5 +164,9 @@ fun SoundButton(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MainScreen(items = listOf(), playAsset = {})
+    MainScreen(items = listOf(SoundItemHolder(
+        R.string.acutrama,
+        R.raw.acutrama,
+        .5f
+    )), playAsset = {})
 }
