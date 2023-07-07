@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "703114852251",
+    "project_id": "winnebago-man",
+    "storage_bucket": "winnebago-man.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703114852251:android:7df32543f72eb694b6533e",
+        "android_client_info": {
+          "package_name": "com.paulklauser.winnebagoman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703114852251-6k14qrdchbei0c8n7rj7lpspfaatkfi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF_7e9Jqn0e9cBJbwhJDWm0BsysI1u9Do"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703114852251-6k14qrdchbei0c8n7rj7lpspfaatkfi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

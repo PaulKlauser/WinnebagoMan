@@ -5,6 +5,8 @@ import android.media.MediaPlayer
 import androidx.annotation.RawRes
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 
 class SoundBoardViewModel : ViewModel() {
 
@@ -38,7 +40,10 @@ class SoundBoardViewModel : ViewModel() {
         BackingSoundItem(R.string.god_dang_son_of_a, R.raw.god_damn_sonofa)
     )
 
-    fun playAsset(context: Context, @RawRes assetRes: Int) {
+    fun playAsset(context: Context, @RawRes assetRes: Int, assetName: String) {
+        FirebaseAnalytics.getInstance(context).logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
+            param(FirebaseAnalytics.Param.ITEM_NAME, assetName)
+        }
         mediaPlayers[assetRes] =
             MediaPlayer.create(context, assetRes).apply {
                 val index =

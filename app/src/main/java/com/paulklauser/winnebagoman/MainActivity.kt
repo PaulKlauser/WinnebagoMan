@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
 
             MainScreen(items = displayItems, playAsset = remember {
                 {
-                    vm.playAsset(this, it.audioAssetRes)
+                    vm.playAsset(this, it.audioAssetRes, it.displayText)
                 }
             })
         }
@@ -87,7 +87,7 @@ fun soundItemHolder(
     itemPlaying: Boolean
 ): SoundItemHolder {
     return SoundItemHolder(
-        displayTextRes = displayTextRes,
+        displayText = stringResource(id = displayTextRes),
         audioAssetRes = audioAssetRes,
         progress = animateFloatAsState(
             targetValue = if (itemPlaying) 1f else 0f,
@@ -152,7 +152,7 @@ fun SoundButton(
                     .background(Color.Cyan)
             )
             Text(
-                text = stringResource(soundItemHolder.displayTextRes), modifier = Modifier
+                text = soundItemHolder.displayText, modifier = Modifier
                     .padding(vertical = 8.dp)
                     .align(Alignment.Center)
             )
@@ -165,7 +165,7 @@ fun SoundButton(
 @Composable
 fun DefaultPreview() {
     MainScreen(items = listOf(SoundItemHolder(
-        R.string.acutrama,
+        "Acutrama",
         R.raw.acutrama,
         .5f
     )), playAsset = {})
