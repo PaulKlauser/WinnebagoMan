@@ -11,7 +11,6 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,12 +28,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Checkbox
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -45,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -93,7 +90,7 @@ class MainActivity : ComponentActivity() {
                     }
                 },
                 isRetroTheme = isRetro,
-                toggleTheme = remember { { isRetro = !isRetro } })
+                toggleTheme = remember { { isRetro = it} })
         }
     }
 }
@@ -131,7 +128,7 @@ fun MainScreen(
     items: List<SoundItemHolder>,
     playAsset: (SoundItemHolder) -> Unit,
     isRetroTheme: Boolean,
-    toggleTheme: () -> Unit
+    toggleTheme: (Boolean) -> Unit
 ) {
     WinnebagoManTheme(isRetroTheme = isRetroTheme) {
         Scaffold(topBar = {
@@ -139,17 +136,8 @@ fun MainScreen(
                 title = { Text(text = "Winnebago Man!!", color = Color.White) },
                 contentPadding = WindowInsets.statusBars.asPaddingValues(),
                 actions = {
-                    Button(
-                        onClick = toggleTheme,
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
-                        elevation = null
-                    ) {
-                        Image(
-                            imageVector = Icons.Outlined.Refresh,
-                            contentDescription = "Toggle theme",
-                            colorFilter = ColorFilter.tint(Color.White)
-                        )
-                    }
+                    Text(text = "Retro Theme")
+                    Checkbox(checked = isRetroTheme, onCheckedChange = toggleTheme)
                 }
             )
         }) {
