@@ -13,8 +13,8 @@ android {
         applicationId "com.paulklauser.winnebagoman"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.valueOf(System.getenv("VERSION_CODE") ?: 1)
+        versionName System.getenv("VERSION_NAME") ?: "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -22,10 +22,20 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile rootProject.file("keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
