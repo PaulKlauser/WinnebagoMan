@@ -23,7 +23,7 @@ jobs:
           VERSION_NAME=$(echo "${{ github.ref_name }}" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
           echo "version_name=$VERSION_NAME" >> "$GITHUB_ENV"
 
-      - name: Decode GPG Key
+      - name: Decode Keystore
         env:
           ENCODED_KEYSTORE: ${{ secrets.ENCODED_KEYSTORE }}
         run: echo $ENCODED_KEYSTORE | base64 -d > keystore
