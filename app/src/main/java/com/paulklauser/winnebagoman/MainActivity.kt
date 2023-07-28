@@ -5,8 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RawRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,7 +26,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -40,15 +43,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.ui.TopAppBar
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.paulklauser.winnebagoman.ui.theme.LightBlue
+import com.paulklauser.winnebagoman.ui.theme.LightGreen
+import com.paulklauser.winnebagoman.ui.theme.LightOrange
+import com.paulklauser.winnebagoman.ui.theme.LightPink
+import com.paulklauser.winnebagoman.ui.theme.LightPurple
 import com.paulklauser.winnebagoman.ui.theme.WinnebagoManTheme
 
 class MainActivity : ComponentActivity() {
@@ -108,6 +118,14 @@ fun soundItemHolder(
     )
 }
 
+private val potentialButtonColors = listOf(
+    LightBlue,
+    LightGreen,
+    LightOrange,
+    LightPink,
+    LightPurple
+)
+
 @Composable
 fun MainScreen(
     items: List<SoundItemHolder>,
@@ -144,8 +162,12 @@ fun MainScreen(
                     contentPadding = PaddingValues(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(items) { item ->
-                        SoundButton(soundItemHolder = item, playAsset = playAsset)
+                    itemsIndexed(items) { index, item ->
+                        SoundButton(
+                            soundItemHolder = item,
+                            playAsset = playAsset,
+                            backgroundColor = if (isRetroTheme) MaterialTheme.colors.primary else potentialButtonColors[index % 5]
+                        )
                     }
                 }
             }
@@ -157,13 +179,36 @@ fun MainScreen(
 fun SoundButton(
     modifier: Modifier = Modifier,
     soundItemHolder: SoundItemHolder,
-    playAsset: (SoundItemHolder) -> Unit
+    playAsset: (SoundItemHolder) -> Unit,
+    backgroundColor: Color = MaterialTheme.colors.primary
 ) {
+    val scale = remember { Animatable(1f) }
+    val isPlaying = soundItemHolder.progress > 0
+    val springSpec = spring<Float>(
+        dampingRatio = Spring.DampingRatioMediumBouncy,
+        stiffness = Spring.StiffnessLow
+    )
+    LaunchedEffect(key1 = isPlaying) {
+        if (isPlaying) {
+            scale.animateTo(1.25f, animationSpec = springSpec)
+        } else {
+            scale.animateTo(1f, animationSpec = springSpec)
+        }
+    }
     Button(
         modifier = modifier
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp)
+            .scale(scale.value)
+            .zIndex(if (scale.value > 1f) 1f else 0f),
         onClick = { playAsset(soundItemHolder) },
-        contentPadding = PaddingValues(0.dp)
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.Black,
+            backgroundColor = backgroundColor
+        ),
+        elevation = if (soundItemHolder.progress > 0) ButtonDefaults.elevation(defaultElevation = 20.dp) else ButtonDefaults.elevation(
+            defaultElevation = 0.dp
+        )
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Box(
@@ -213,6 +258,16 @@ fun ModernPreview() {
                 "Acutrama",
                 R.raw.acutrama,
                 .7f
+            ),
+            SoundItemHolder(
+                "Something Else",
+                R.raw.acutrama,
+                0f
+            ),
+            SoundItemHolder(
+                "Acutrama",
+                R.raw.acutrama,
+                0f
             ),
             SoundItemHolder(
                 "Something Else",

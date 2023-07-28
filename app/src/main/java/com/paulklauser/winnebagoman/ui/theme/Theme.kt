@@ -3,7 +3,6 @@ package com.paulklauser.winnebagoman.ui.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 private val RetroColorPalette = darkColors(
     primary = ButtonGray,
@@ -12,10 +11,10 @@ private val RetroColorPalette = darkColors(
 )
 
 private val ModernColorPalette = darkColors(
-    primary = Color(0xFF67C6FF),
-    secondary = Color(0xFFFFD9A9),
-    surface = Color(0xFF5973FF),
-    background = Color(0xFF273365)
+    primary = LightBlue,
+    secondary = LightYellow,
+    surface = DarkPurple,
+    background = DarkPurple2
 )
 
 @Composable
