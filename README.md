@@ -13,3 +13,5 @@ I figured it was time for a rebuild with modern tooling.
 ### New
 
 ![New](screenshots/new.png?raw=true)
+
+[Privacy Policy](privacy_policy.html)
