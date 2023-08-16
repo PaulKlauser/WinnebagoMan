@@ -4,16 +4,23 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
 
-private val ColorPalette = darkColors(
+private val RetroColorPalette = darkColors(
     primary = ButtonGray,
     primaryVariant = ButtonGray,
-    secondary = ButtonGray
+    surface = ToolbarGray
+)
+
+private val ModernColorPalette = darkColors(
+    primary = LightBlue,
+    secondary = LightYellow,
+    surface = DarkPurple,
+    background = DarkPurple2
 )
 
 @Composable
-fun WinnebagoManTheme(content: @Composable () -> Unit) {
+fun WinnebagoManTheme(isRetroTheme: Boolean, content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = ColorPalette,
+        colors = if (isRetroTheme) RetroColorPalette else ModernColorPalette,
         typography = Typography,
         shapes = Shapes,
         content = content
