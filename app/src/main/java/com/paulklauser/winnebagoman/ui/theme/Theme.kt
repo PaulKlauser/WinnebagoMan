@@ -19,19 +19,10 @@ private val ModernColorPalette = darkColors(
 
 @Composable
 fun WinnebagoManTheme(isRetroTheme: Boolean, content: @Composable () -> Unit) {
-    if (isRetroTheme) {
-        MaterialTheme(
-            colors = RetroColorPalette,
-            typography = Typography,
-            shapes = Shapes,
-            content = content
-        )
-    } else {
-        MaterialTheme(
-            colors = ModernColorPalette,
-            typography = Typography,
-            shapes = Shapes,
-            content = content
-        )
-    }
+    MaterialTheme(
+        colors = if (isRetroTheme) RetroColorPalette else ModernColorPalette,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
 }
