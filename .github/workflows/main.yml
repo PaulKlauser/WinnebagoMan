@@ -43,6 +43,7 @@ jobs:
       - name: Upload to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
+          packageName: com.paulklauser.winnebagoman
           serviceAccountJsonPlainText: ${{ secrets.PLAY_UPLOAD_JSON }}
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
 
