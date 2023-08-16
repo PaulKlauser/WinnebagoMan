@@ -1,4 +1,5 @@
 # Winnebago Man Soundboard
+<a href="https://play.google.com/store/apps/details?id=com.paulklauser.winnebagoman"><img src="screenshots/google-play-badge.svg" width="200"></a>
 
 [Winnebago Man](https://www.youtube.com/watch?v=zSWUWPx2VeQ)
 
